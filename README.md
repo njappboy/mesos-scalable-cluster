@@ -16,7 +16,7 @@ Once your cluster has been created you will have a resource group containing 3 p
 
 The following image is an example of a cluster with 1 jumpbox, 3 masters, and 3 agents:
 
-![Image of Mesos cluster on azure](https://raw.githubusercontent.com/anhowe/mesos-scalable-cluster/master/images/mesos.png)
+![Image of Mesos cluster on azure](https://raw.githubusercontent.com/clca/mesos-scalable-cluster/master/images/mesos.png)
 
 You can see the following parts:
 
