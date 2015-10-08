@@ -247,6 +247,11 @@ then
 fi
 
 ##################
+# Install unzip
+#################
+sudo apt-get -y install unzip
+
+##################
 # Install Mesos
 ##################
 
