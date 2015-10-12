@@ -281,7 +281,10 @@ if ismaster ; then
   do
     IPADDR=`getent hosts ${MASTERPREFIX}${i} | awk '{ print $1 }'`
     echo "server.${i}=${IPADDR}:2888:3888" | sudo tee -a /etc/zookeeper/conf/zoo.cfg
-    # due to mesos team experience ip addresses are chosen over dns names
+# will have to find a better way to set the max number of client connections
+    echo "maxClientCnxns=100" | sudo tee -a /etc/zookeeper/conf/zoo.cfg
+    
+# due to mesos team experience ip addresses are chosen over dns names
     #echo "server.${i}=${MASTERPREFIX}${i}:2888:3888" | sudo tee -a /etc/zookeeper/conf/zoo.cfg
   done
 fi

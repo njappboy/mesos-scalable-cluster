@@ -195,5 +195,12 @@ time wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.
 time sudo dpkg -i google-chrome-stable_current_amd64.deb
 time sudo apt-get -y --force-yes install -f
 time rm /tmp/google-chrome-stable_current_amd64.deb
+
+###################
+# Install Java 
+###################
+sudo apt-get -y install openjdk-8-jre-headless
+
+
 date
 echo "completed ubuntu devbox install on pid $$"
