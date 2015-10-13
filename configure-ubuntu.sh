@@ -199,7 +199,7 @@ time rm /tmp/google-chrome-stable_current_amd64.deb
 ###################
 # Install Java 
 ###################
-sudo apt-get -y install openjdk-8-jre-headless
+sudo apt-get -y install openjdk-7-jre-headless
 
 
 date
