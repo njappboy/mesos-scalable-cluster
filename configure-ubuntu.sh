@@ -200,6 +200,10 @@ time rm /tmp/google-chrome-stable_current_amd64.deb
 # Install Java 
 ###################
 sudo apt-get -y install openjdk-7-jre-headless
+###################
+# Install pip 
+###################
+sudo apt-get install -y python-pip
 
 
 date

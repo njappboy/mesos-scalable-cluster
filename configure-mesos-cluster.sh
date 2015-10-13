@@ -351,7 +351,7 @@ respawn
 
 exec /usr/local/mesos-dns/mesos-dns -config /usr/local/mesos-dns/mesos-dns.json" > mesos-dns.conf
   sudo mv mesos-dns.conf /etc/init
-  sudo service mesos-dns starts
+  sudo service mesos-dns start
 fi
 
 
