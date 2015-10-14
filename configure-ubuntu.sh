@@ -200,11 +200,17 @@ time rm /tmp/google-chrome-stable_current_amd64.deb
 # Install Java 
 ###################
 sudo apt-get -y install openjdk-7-jre-headless
+
 ###################
-# Install pip 
+# Install pip & setup dcos directory 
 ###################
 sudo apt-get install -y python-pip
 
+sudo pip install virtualenv
+
+mkdir ~/dcos
+curl -O ~/dcos/install.sh  https://downloads.mesosphere.io/dcos-cli/install.sh
+chmod +x ~/dcos/install.sh
 
 date
 echo "completed ubuntu devbox install on pid $$"
