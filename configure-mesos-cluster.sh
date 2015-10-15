@@ -322,7 +322,8 @@ if ismaster ; then
   sudo wget https://github.com/mesosphere/mesos-dns/releases/download/v0.2.0/mesos-dns-v0.2.0-linux-amd64.tgz
   sudo tar zxvf mesos-dns-v0.2.0-linux-amd64.tgz
   sudo mv mesos-dns-v0.2.0-linux-amd64 /usr/local/mesos-dns/mesos-dns
-  RESOLVER=`cat /etc/resolvconf/resolv.conf.d/head | grep nameserver | tail -n 1 | awk '{print $2}'`
+  RESOLVER=`cat /etc/resolv.conf | grep nameserver | tail -n 1 | awk '{print $2}'`
+  echo $RESOLVER > /etc/resolvconf/resolv.conf.d/head
 
   echo "
 {
@@ -378,6 +379,7 @@ if isagent ; then
   done
 
   mv $RESOLV_TMP /etc/resolvconf/resolv.conf.d/head
+  sudo resolvconf -u
 fi
 
 ##############################################
