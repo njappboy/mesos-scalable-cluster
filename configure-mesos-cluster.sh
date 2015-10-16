@@ -323,7 +323,15 @@ if ismaster ; then
   sudo tar zxvf mesos-dns-v0.2.0-linux-amd64.tgz
   sudo mv mesos-dns-v0.2.0-linux-amd64 /usr/local/mesos-dns/mesos-dns
   RESOLVER=`cat /etc/resolv.conf | grep nameserver | tail -n 1 | awk '{print $2}'`
-  echo $RESOLVER > /etc/resolvconf/resolv.conf.d/head
+
+########################################
+# generate nameserver IPs for resolvconf/resolv.conf.d/head file
+########################################
+  for i in `seq 1 $MASTERCOUNT` ;
+  do
+    IPADDR=`getent hosts ${MASTERPREFIX}${i} | awk '{ print $1 }'`
+    echo "nameserver ${IPADDR}" | sudo tee -a /etc/resolvconf/resolv.conf.d/head
+  done
 
   echo "
 {

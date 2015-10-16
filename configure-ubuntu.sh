@@ -208,9 +208,9 @@ sudo apt-get install -y python-pip
 
 sudo pip install virtualenv
 
-mkdir ~/dcos
-curl -O ~/dcos/install.sh  https://downloads.mesosphere.io/dcos-cli/install.sh
-chmod +x ~/dcos/install.sh
+mkdir $HOMEDIR/dcos
+curl -O $HOMEDIR/dcos/install.sh  https://downloads.mesosphere.io/dcos-cli/install.sh
+chmod +x $HOMEDIR/dcos/install.sh
 
 date
 echo "completed ubuntu devbox install on pid $$"
