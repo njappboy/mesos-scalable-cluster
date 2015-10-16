@@ -327,12 +327,13 @@ if ismaster ; then
 ########################################
 # generate nameserver IPs for resolvconf/resolv.conf.d/head file
 ########################################
-  for i in `seq 1 $MASTERCOUNT` ;
+ for i in `seq 1 $MASTERCOUNT` ;
   do
     IPADDR=`getent hosts ${MASTERPREFIX}${i} | awk '{ print $1 }'`
     echo "nameserver ${IPADDR}" | sudo tee -a /etc/resolvconf/resolv.conf.d/head
   done
-
+sudo resolvconf -u
+ 
   echo "
 {
   \"zk\": \"zk://127.0.0.1:2181/mesos\",
