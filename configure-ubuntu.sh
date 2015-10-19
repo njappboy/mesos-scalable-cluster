@@ -209,8 +209,22 @@ sudo apt-get install -y python-pip
 sudo pip install virtualenv
 
 mkdir $HOMEDIR/dcos
-curl -O $HOMEDIR/dcos/install.sh  https://downloads.mesosphere.io/dcos-cli/install.sh
-chmod +x $HOMEDIR/dcos/install.sh
+cd $HOMEDIR/dcos
+curl -O  https://downloads.mesosphere.io/dcos-cli/install.sh
+chmod +x ./install.sh
+
+
+########################################
+# generate nameserver IPs for resolvconf/resolv.conf.d/head file
+# for mesos_dns so service names can be resolve from the jumpbox as well
+########################################
+
+ for i in `seq 1 $MASTERCOUNT` ;
+  do
+    IPADDR=`getent hosts ${MASTERPREFIX}${i} | awk '{ print $1 }'`
+    echo "nameserver ${IPADDR}" | sudo tee -a /etc/resolvconf/resolv.conf.d/head
+  done
+sudo resolvconf -u
 
 date
 echo "completed ubuntu devbox install on pid $$"
