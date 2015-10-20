@@ -538,9 +538,9 @@
          "masterCount": {
             "value": "[parameters('masterCount')]"
           },
-	 "masterFirstAddr": {
+	 	"masterFirstAddr": {
             "value": "[variables('masterFirstAddr')]"
-          },
+          }
         }
       }
     }
