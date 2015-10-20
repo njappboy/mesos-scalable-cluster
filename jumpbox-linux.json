@@ -85,7 +85,7 @@
       "metadata": {
         "description": "initial IP address for Masters"
        }
-
+    }
   },
   "variables": {
     "vmName": "[concat(parameters('jumpboxVMNamePrefix'), '1')]",
