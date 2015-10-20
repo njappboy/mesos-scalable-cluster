@@ -12,11 +12,16 @@ ps axjf
 
 AZUREUSER=$1
 SSHKEY=$2
+MASTERCOUNT=$3
+MASTERINITIALADDR=$4
 HOMEDIR="/home/$AZUREUSER"
 VMNAME=`hostname`
 echo "User: $AZUREUSER"
 echo "User home dir: $HOMEDIR"
 echo "vmname: $VMNAME"
+echo "Num of Masters:$MASTERCOUNT"
+echo "Master Initial Addr: $MASTERINITIALADDR"
+
 
 ###################
 # setup ssh access
@@ -221,8 +226,7 @@ chmod +x ./install.sh
 
  for i in `seq 1 $MASTERCOUNT` ;
   do
-    IPADDR=`getent hosts ${MASTERPREFIX}${i} | awk '{ print $1 }'`
-    echo "nameserver ${IPADDR}" | sudo tee -a /etc/resolvconf/resolv.conf.d/head
+    echo "nameserver 10.0.0.$i" | sudo tee -a /etc/resolvconf/resolv.conf.d/head
   done
 sudo resolvconf -u
 

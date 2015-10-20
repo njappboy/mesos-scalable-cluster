@@ -73,7 +73,18 @@
       "metadata": {
         "description": "Configure all linux machines with the SSH rsa public key string.  Use 'disabled' to not configure access with SSH rsa public key."
       }
-    }
+    },
+    "masterCount": {
+      "type": "int",
+      "metadata": {
+        "description": "number of Masters in the cluster"
+       },
+    "masterFirstAddr": {
+      "type": "int",
+      "metadata": {
+        "description": "initial IP address for Masters"
+       }
+
   },
   "variables": {
     "vmName": "[concat(parameters('jumpboxVMNamePrefix'), '1')]",
@@ -179,7 +190,7 @@
         "type": "CustomScriptForLinux",
         "typeHandlerVersion": "1.3",
         "settings": {
-          "commandToExecute": "[concat(variables('commandPrefix'), variables('wgetCommandPrefix'), parameters('adminUsername'), ' \"', parameters('sshRSAPublicKey'), '\" ', variables('wgetCommandPostfix'))]"
+          "commandToExecute": "[concat(variables('commandPrefix'), variables('wgetCommandPrefix'), parameters('adminUsername'), parameters('masterCount'), parameters('masterFirstAddr'), ' \"', parameters('sshRSAPublicKey'), '\" ', variables('wgetCommandPostfix'))]"
         }
       }
     }

@@ -534,7 +534,13 @@
           },
           "sshRSAPublicKey": {
             "value": "[parameters('sshRSAPublicKey')]"
-          }
+          },
+         "masterCount": {
+            "value": "[parameters('masterCount')]"
+          },
+	 "masterFirstAddr": {
+            "value": "[variables('masterFirstAddr')]"
+          },
         }
       }
     }
