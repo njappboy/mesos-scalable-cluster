@@ -224,7 +224,7 @@ chmod +x ./install.sh
 # for mesos_dns so service names can be resolve from the jumpbox as well
 ########################################
 
- for i in `seq 1 $MASTERCOUNT` ;
+ for i in `seq $MASTERINITIALADDR MASTERINITIALADDR+$MASTERCOUNT` ;
   do
     echo "nameserver 10.0.0.$i" | sudo tee -a /etc/resolvconf/resolv.conf.d/head
   done
