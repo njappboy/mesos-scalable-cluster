@@ -229,5 +229,7 @@ chmod +x ./install.sh
   done
 sudo resolvconf -u
 
+sudo chmod 777 /var/log/azure/
+
 date
 echo "completed ubuntu devbox install on pid $$"
