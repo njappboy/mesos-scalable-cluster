@@ -231,5 +231,8 @@ sudo resolvconf -u
 
 sudo chmod 777 /var/log/azure/
 
+# AZUREUSER can run docker without sudo-ing
+sudo usermod -aG docker $AZUREUSER
+
 date
 echo "completed ubuntu devbox install on pid $$"
