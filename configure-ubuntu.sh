@@ -214,9 +214,11 @@ sudo apt-get install -y python-pip
 sudo pip install virtualenv
 
 mkdir $HOMEDIR/dcos
+sudo chown $AZUREUSER $HOMEDIR/dcos
 cd $HOMEDIR/dcos
 curl -O  https://downloads.mesosphere.io/dcos-cli/install.sh
 chmod +x ./install.sh
+sudo chown $AZUREUSER ./install.sh
 
 
 ########################################
@@ -231,7 +233,7 @@ sudo resolvconf -u
 
 sudo chmod 777 /var/log/azure/
 
-# AZUREUSER can run docker without sudo-ing
+# AZUREUSER can run docker without sudo
 sudo usermod -aG docker $AZUREUSER
 
 date
