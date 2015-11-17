@@ -463,7 +463,7 @@
           },
           "storageVMSize": {
             "value": "[parameters('storageVMSize')]"
-          }
+          },
           "storageCount": {
             "value": "[parameters('storageCount')]"
           },
@@ -502,7 +502,7 @@
           },
           "sshRSAPublicKey": {
             "value": "[parameters('sshRSAPublicKey')]"
-          },
+          }
         }
       }
     },
