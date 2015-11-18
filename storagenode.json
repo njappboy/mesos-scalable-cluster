@@ -113,6 +113,19 @@
   },
   "resources": [
     {
+      "type": "Microsoft.Storage/storageAccounts",
+      "name": "[concat(parameters('newStorageAccountNamePrefix'), copyIndex())]",
+      "apiVersion": "2015-05-01-preview",
+      "location": "[parameters('location')]",
+      "copy": {
+        "name": "gfs",
+        "count": "[parameters('storageCount')]"
+      },
+      "properties": {
+        "accountType": "Standard_LRS"
+      }
+    },  
+    {
       "apiVersion": "2015-06-15",
       "type": "Microsoft.Compute/availabilitySets",
       "name": "[variables('availabilitySet')]",
@@ -126,7 +139,7 @@
       "location": "[resourceGroup().location]",
       "copy": {
         "name": "nicLoopNode",
-        "count": "[parameters('masterCount')]"
+        "count": "[parameters('storageCount')]"
       },
       "properties": {
         "ipConfigurations": [
@@ -149,7 +162,7 @@
       "name": "[concat(parameters('storageVMNamePrefix'), copyIndex(1))]",
       "location": "[resourceGroup().location]",
       "copy": {
-        "name": "vmLoopNode",
+        "name": "gfs",
         "count": "[parameters('storageCount')]"
       },
       "dependsOn": [
@@ -189,7 +202,7 @@
               "diskSizeGB": "[parameters('storageDataDiskSize')]",
               "lun": 0,
               "vhd": {
-                "Uri": "[concat('http://', parameters('storageAccountName'), copyindex(),'.blob.core.windows.net/vhds/', parameters('storageVMNamePrefix'), copyIndex(), 'datadisk1.vhd')]"
+                "Uri": "[concat('http://', parameters('newStorageAccountName'), copyindex(),'.blob.core.windows.net/vhds/', parameters('storageVMNamePrefix'), copyIndex(), 'datadisk1.vhd')]"
               },
               "createOption": "Empty"
             },
@@ -198,7 +211,7 @@
               "diskSizeGB": "[parameters('storageDataDiskSize')]",
               "lun": 1,
               "vhd": {
-                "Uri": "[concat('http://', parameters('storageAccountName'), copyindex(),'.blob.core.windows.net/vhds/', parameters('storageVMNamePrefix'), copyIndex(), 'datadisk2.vhd')]"
+                "Uri": "[concat('http://', parameters('newStorageAccountName'), copyindex(),'.blob.core.windows.net/vhds/', parameters('storageVMNamePrefix'), copyIndex(), 'datadisk2.vhd')]"
               },
               "createOption": "Empty"
             }

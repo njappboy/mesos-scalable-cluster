@@ -453,7 +453,7 @@
         },
         "parameters": {
           "newStorageAccountNamePrefix": {
-            "value": "[concat(parameters('newStorageAccountNamePrefix'))]"
+            "value": "[concat(parameters('newStorageAccountNamePrefix'), 'GFS')]"
           },
           "adminUsername": {
             "value": "[parameters('adminUsername')]"
