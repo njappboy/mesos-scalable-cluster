@@ -47,7 +47,7 @@
     "storageFirstAddr": {
       "type": "int",
       "metadata": {
-        "description": "The value of the 4th IPv4 octet of the storage master within the subnet"
+        "description": "The value of the 4th IPv4 octet of the storage node within the subnet"
       }
     },
     "storageVMNamePrefix": {
@@ -64,11 +64,10 @@
     },
     "storageDataDiskSize": {
       "type": "int",
-      "defaultValue": "1000",
       "metadata": {
         "description": "Size of the data disk in GB"
       }
-    }
+    },
     "osImagePublisher": {
       "type": "string",
       "metadata": {
@@ -104,7 +103,7 @@
       "metadata": {
         "description": "Configure all linux machines with the SSH rsa public key string.  Use 'disabled' to not configure access with SSH rsa public key."
       }
-    },
+    }
   },
   "variables": {
     "availabilitySet": "storageAvailabilitySet",
