@@ -192,7 +192,7 @@
           "osDisk": {
             "name": "[concat(parameters('storageVMNamePrefix'), copyIndex(1),'-osdisk')]",
             "vhd": {
-              "uri": "[concat('http://', [concat('Microsoft.Storage/storageAccounts/', parameters('newStorageAccountNamePrefix'), copyIndex())], '.blob.core.windows.net/vhds/', parameters('storageVMNamePrefix'), copyIndex(1), '-osdisk.vhd')]"
+              "uri": "[concat('http://', parameters('newStorageAccountNamePrefix'), copyIndex(), '.blob.core.windows.net/vhds/', parameters('storageVMNamePrefix'), copyIndex(), '-osdisk.vhd')]"
             },
             "caching": "ReadWrite",
             "createOption": "FromImage"
@@ -203,7 +203,7 @@
               "diskSizeGB": "[parameters('storageDataDiskSize')]",
               "lun": 0,
               "vhd": {
-                "Uri": "[concat('http://', [concat('Microsoft.Storage/storageAccounts/', parameters('newStorageAccountNamePrefix'), copyIndex())], copyindex(),'.blob.core.windows.net/vhds/', parameters('storageVMNamePrefix'), copyIndex(), 'datadisk1.vhd')]"
+                "Uri": "[concat('http://', parameters('newStorageAccountNamePrefix'), copyIndex(), '.blob.core.windows.net/vhds/', parameters('storageVMNamePrefix'), copyIndex(), 'datadisk1.vhd')]"
               },
               "createOption": "Empty"
             },
@@ -212,7 +212,7 @@
               "diskSizeGB": "[parameters('storageDataDiskSize')]",
               "lun": 1,
               "vhd": {
-                "Uri": "[concat('http://', [concat('Microsoft.Storage/storageAccounts/', parameters('newStorageAccountNamePrefix'), copyIndex())], copyindex(),'.blob.core.windows.net/vhds/', parameters('storageVMNamePrefix'), copyIndex(), 'datadisk2.vhd')]"
+                "Uri": "[concat('http://', parameters('newStorageAccountNamePrefix'), copyIndex(), '.blob.core.windows.net/vhds/', parameters('storageVMNamePrefix'), copyIndex(), 'datadisk2.vhd')]"
               },
               "createOption": "Empty"
             }
