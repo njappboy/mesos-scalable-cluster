@@ -230,7 +230,7 @@
     },
     {
       "type": "Microsoft.Compute/virtualMachines/extensions",
-      "name": "[concat(parameters('sstorageVMNamePrefix'), copyIndex(1), '/configuremaster')]",
+      "name": "[concat(parameters('storageVMNamePrefix'), copyIndex(1), '/configuremaster')]",
       "apiVersion": "2015-06-15",
       "location": "[resourceGroup().location]",
       "copy": {
