@@ -588,6 +588,12 @@
           },
           "omsStorageAccountKey": {
             "value": "[variables('omsStorageAccountKey')]"
+          },
+          "storageVMNamePrefix": {
+            "value": "[variables('storageVMNamePrefix')]"
+          },
+          "storageCount": {
+            "value": "[variables('storageCount')]"
           }
         }
       }

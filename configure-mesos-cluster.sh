@@ -32,6 +32,8 @@ ACCOUNTKEY=$8
 set -x
 AZUREUSER=$9
 SSHKEY=${10}
+STORAGEPREFIX=$11
+STORAGECOUNT=$12
 HOMEDIR="/home/$AZUREUSER"
 VMNAME=`hostname`
 VMNUMBER=`echo $VMNAME | sed 's/.*[^0-9]\([0-9]\+\)*$/\1/'`
@@ -44,6 +46,8 @@ echo "vmname: $VMNAME"
 echo "VMNUMBER: $VMNUMBER, VMPREFIX: $VMPREFIX"
 echo "SWARMENABLED: $SWARMENABLED, MARATHONENABLED: $MARATHONENABLED, CHRONOSENABLED: $CHRONOSENABLED"
 echo "ACCOUNTNAME: $ACCOUNTNAME"
+echo "Storage Prefix: $STORAGEPREFIX"
+echo "Storage Count: $STORAGECOUNT"
 
 ###################
 # setup ssh access
@@ -266,6 +270,54 @@ if ismaster ; then
   time sudo apt-get -y --force-yes install mesosphere
 else
   time sudo apt-get -y --force-yes install mesos
+fi
+
+####################################
+# Install glusterfs client on agents
+####################################
+if isagent ; then
+    dpkg -l | grep glusterfs
+    if [ ${?} -ne 0 ];
+    then
+        if [ ! -e /etc/apt/sources.list.d/gluster* ];
+        then
+            echo "adding gluster ppa"
+            time sudo apt-get  -y install python-software-properties
+            time sudo apt-add-repository -y ppa:gluster/glusterfs-3.7
+            time sudo apt-get -y update
+        fi
+
+        echo "installing gluster client"
+        time sudo apt-get -y install glusterfs-client
+    fi
+
+    storageNodes=""
+    storageCount=$(($STORAGECOUNT-1))
+    for i in `seq 0 $storageCount`; do
+        if [ $i -gt 0 ]; then
+           storageNodes="$storageNodes:"
+        fi
+        storageNodes="$storageNodes$STORAGEPREFIX$i"
+    done
+    
+    wget --tries 20 --retry-connrefused --waitretry=15 -q -O docker-volume-glusterfs https://raw.githubusercontent.com/jmspring/mesos-scalable-cluster/glusterfs/extras/agents/docker-volume-glusterfs
+    sudo mv docker-volume-glusterfs /tmp/docker-volume-glusterfs
+
+    echo "
+description     "Keep gluster docker volume driver running."
+
+# no start option as you might not want it to auto-start
+# This might not be supported - you might need a: start on runlevel [3]
+stop on runlevel [!2345]
+
+# if you want it to automatically restart if it crashes, leave the next line in
+respawn
+
+script
+    /usr/local/docker-utils/docker-volume-glusterfs -servers $storageNodes
+end script
+" > glusterfs-docker-volume.conf
+    sudo mv glusterfs-docker-volume.conf /tmp/glusterfs-docker-volume.conf
 fi
 
 #########################
