@@ -305,21 +305,22 @@ if isagent ; then
     sudo mv docker-volume-glusterfs /usr/local/docker-utils/docker-volume-glusterfs
     sudo chmod 755 /usr/local/docker-utils/docker-volume-glusterfs
 
-    echo "
-description     "Keep gluster docker volume driver running."
-
-# no start option as you might not want it to auto-start
-# This might not be supported - you might need a: start on runlevel [3]
-stop on runlevel [!2345]
-
-# if you want it to automatically restart if it crashes, leave the next line in
+    echo "start on startup
+stop on shutdown
 respawn
+respawn limit 20 5
 
 script
-    /usr/local/docker-utils/docker-volume-glusterfs -servers $storageNodes
+  exec /usr/local/docker-utils/docker-volume-glusterfs -servers $storageNodes
+end script
+
+post-start script
+   echo "gluster volume driver started"
 end script
 " > glusterfs-docker-volume.conf
     sudo mv glusterfs-docker-volume.conf /etc/init/glusterfs-docker-volume.conf
+    sudo initctl reload-configuration
+    sudo start glusterfs-docker-volume
 fi
 
 #########################
