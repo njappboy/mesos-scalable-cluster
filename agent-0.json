@@ -44,6 +44,12 @@
         "description": "The count of master nodes"
       }
     },
+    "storageCount": {
+      "type": "int",
+      "metadata": {
+        "description": "The count of storage nodes"
+      }
+    },    
     "subnetPrefix": {
       "type": "string",
       "metadata": {
@@ -72,6 +78,12 @@
       "type": "string",
       "metadata": {
         "description": "The vm name prefix of the agent"
+      }
+    },
+    "storageVMNamePrefix": {
+      "type": "string",
+      "metadata": {
+        "description": "The vm name prefix of the storage node"
       }
     },
     "osImagePublisher": {
