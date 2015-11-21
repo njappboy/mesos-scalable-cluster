@@ -593,7 +593,7 @@
             "value": "[variables('storageVMNamePrefix')]"
           },
           "storageCount": {
-            "value": "[variables('storageCount')]"
+            "value": "[parameters('storageCount')]"
           }
         }
       }
