@@ -301,7 +301,7 @@ if isagent ; then
     done
     
     wget --tries 20 --retry-connrefused --waitretry=15 -q -O docker-volume-glusterfs https://raw.githubusercontent.com/jmspring/mesos-scalable-cluster/glusterfs/extras/agents/docker-volume-glusterfs
-    sudo mv docker-volume-glusterfs /tmp/docker-volume-glusterfs
+#    sudo mv docker-volume-glusterfs /tmp/docker-volume-glusterfs
 
     echo "
 description     "Keep gluster docker volume driver running."
@@ -317,7 +317,7 @@ script
     /usr/local/docker-utils/docker-volume-glusterfs -servers $storageNodes
 end script
 " > glusterfs-docker-volume.conf
-    sudo mv glusterfs-docker-volume.conf /tmp/glusterfs-docker-volume.conf
+#    sudo mv glusterfs-docker-volume.conf /tmp/glusterfs-docker-volume.conf
 fi
 
 #########################
