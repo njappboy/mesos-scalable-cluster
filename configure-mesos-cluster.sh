@@ -292,9 +292,9 @@ if isagent ; then
     fi
 
     storageNodes=""
-    storageCount=$(($STORAGECOUNT-1))
-    for i in `seq 0 $storageCount`; do
-        if [ $i -gt 0 ]; then
+    storageCount=$STORAGECOUNT
+    for i in `seq 1 $storageCount`; do
+        if [ $i -gt 1 ]; then
            storageNodes="$storageNodes:"
         fi
         storageNodes="$storageNodes$STORAGEPREFIX$i"
