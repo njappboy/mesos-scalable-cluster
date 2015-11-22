@@ -1,11 +1,6 @@
 #!/bin/bash
 
-# This script is only tested on CentOS 6.5
-# You can customize variables such as MOUNTPOINT, RAIDCHUNKSIZE and so on to your needs.
-# You can also customize it to work with other Linux flavours and versions.
-# If you customize it, copy it to either Azure blob storage or Github so that Azure
-# custom script Linux VM extension can access it, and specify its location in the 
-# parameters of powershell script or runbook or Azure Resource Manager CRP template.   
+# This script works with both CentOS and Ubuntu
 NODENAME=$(hostname)
 PEERNODEPREFIX=${1}
 PEERNODEIPPREFIX=${2}
@@ -152,16 +147,18 @@ configure_disks() {
 
 open_ports() {
     index=0
+    nodeIndex=1
     while [ $index -lt $NODECOUNT ]; do
         if [ $index -ne $NODEINDEX ]; then
      
             quad="$((${PEERNODEIPSTART} + ${index}))"
             iptables -I INPUT -p all -s "${PEERNODEIPPREFIX}${quad}" -j ACCEPT
-            echo "${PEERNODEIPPREFIX}${quad}    ${PEERNODEPREFIX}${index}" >> /etc/hosts
+            echo "${PEERNODEIPPREFIX}${quad}    ${PEERNODEPREFIX}${nodeIndex}" >> /etc/hosts
         else
-            echo "127.0.0.1    ${PEERNODEPREFIX}${index}" >> /etc/hosts
+            echo "127.0.0.1    ${PEERNODEPREFIX}${nodeIndex}" >> /etc/hosts
         fi
         let index++
+        let nodeIndex++
     done
     iptables-save
 }
@@ -295,9 +292,9 @@ configure_gluster() {
     failed=1
     while [ $retry -gt 0 ] && [ $failed -gt 0 ]; do
         failed=0
-        index=0
+        index=1
         echo retrying $retry >> /tmp/error
-        while [ $index -lt $(($NODECOUNT-1)) ]; do
+        while [ $index -ne $NODECOUNT ]; do
             ping -c 3 "${PEERNODEPREFIX}${index}" > /tmp/error
             gluster peer probe "${PEERNODEPREFIX}${index}" >> /tmp/error
             if [ ${?} -ne 0 ];
