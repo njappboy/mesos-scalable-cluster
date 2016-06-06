@@ -300,7 +300,7 @@ if isagent ; then
         storageNodes="$storageNodes$STORAGEPREFIX$i"
     done
     
-    wget --tries 20 --retry-connrefused --waitretry=15 -q -O docker-volume-glusterfs https://raw.githubusercontent.com/jmspring/mesos-scalable-cluster/glusterfs/extras/agents/docker-volume-glusterfs
+    wget --tries 20 --retry-connrefused --waitretry=15 -q -O docker-volume-glusterfs https://raw.githubusercontent.com/njappboy/mesos-scalable-cluster/glusterfs/extras/agents/docker-volume-glusterfs
     sudo mkdir -p /usr/local/docker-utils/
     sudo mv docker-volume-glusterfs /usr/local/docker-utils/docker-volume-glusterfs
     sudo chmod 755 /usr/local/docker-utils/docker-volume-glusterfs

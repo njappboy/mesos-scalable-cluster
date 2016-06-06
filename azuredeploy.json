@@ -256,7 +256,7 @@
     "nsgName": "node-nsg",
     "nsgID": "[resourceId('Microsoft.Network/networkSecurityGroups',variables('nsgName'))]",
     "storageAccountType": "Standard_GRS",
-    "customScriptLocation": "https://raw.githubusercontent.com/jmspring/mesos-scalable-cluster/glusterfs/",
+    "customScriptLocation": "https://raw.githubusercontent.com/njappboy/mesos-scalable-cluster/glusterfs/",
     "agentFiles": [
       "agent-0.json",
       "agent-gt0.json"
@@ -652,7 +652,7 @@
          "masterCount": {
             "value": "[parameters('masterCount')]"
           },
-	 	"masterFirstAddr": {
+	 	     "masterFirstAddr": {
             "value": "[variables('masterFirstAddr')]"
           }
         }
