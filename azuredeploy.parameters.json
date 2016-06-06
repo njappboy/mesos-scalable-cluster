@@ -20,6 +20,9 @@
   "masterCount": {
     "value": 3
   },
+  "masterFirstAddr":{
+    "value": 5
+  },
   "jumpboxConfiguration": {
     "value": "windows"
   },
