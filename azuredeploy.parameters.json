@@ -1,4 +1,10 @@
 {
+  "masterCount":{
+    "value": 1
+  },
+  "masterFirstAddr":{
+    "value": 5
+  },
   "newStorageAccountNamePrefix": {
     "value": "mesosscalable0915s"
   },
