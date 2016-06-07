@@ -58,6 +58,13 @@
         "description": "The number of Mesos masters for the cluster."
       }
     },
+    "masterFirstAddr":{
+      "type": "int",
+      "defaultValue": 5,
+      "metadata":{
+        "description": "Add a better description here."
+      }
+    },
     "storageCount": {
       "type": "int",
       "defaultValue": 2,
@@ -251,6 +258,7 @@
     "subnetPrefix": "10.0.0.0/18",
     "jumpboxAddr": 4,
     "masterFirstAddr": 5,
+    "masterCount": 1,
     "agentFirstAddr": 50,
     "storageFirstAddr": 150,
     "nsgName": "node-nsg",
